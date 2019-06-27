@@ -3,6 +3,7 @@ import ReactDOM from "react-dom"
 import { BrowserRouter, Route, Link } from "react-router-dom"
 import axios from "axios"
 import Home from "./components/Home"
+import "./index.css"
 
 class App extends React.Component {
 	state = {
@@ -33,9 +34,9 @@ class App extends React.Component {
 		return (
 			<div className="App">
                 <header>
-                    <h1>Friends List</h1>
                     <nav>
                         <Link to="/">Home</Link>
+                        <Link to="/friends">Friends</Link>
                     </nav>
                 </header>
 

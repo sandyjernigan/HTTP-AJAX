@@ -9,39 +9,26 @@ import "./index.css"
 
 class App extends React.Component {
 	state = {
-		friends: [
-            {
-                id: 1,
-                name: 'Ben',
-                age: 30,
-                email: 'ben@lambdaschool.com',
-            },
-            {
-                id: 2,
-                name: 'Austen',
-                age: 32,
-                email: 'austen@lambdaschool.com',
-            }
-        ]
+		friends: []
 	}
 
-	// componentDidMount() {
-	// 	axios.get('http://localhost:5000/friends')
-	// 		.then(response => {
-	// 			this.setState({
-	// 				friends: response.data
-	// 			})
-	// 		})
-	// 		.then(() => {
-	// 			return axios.get('http://localhost:5000/')
-	// 		})
-	// 		.then(response => {
-	// 			console.log(response.data)
-	// 		})
-	// 		.catch(err => {
-	// 			console.log('Error:', err)
-	// 		})
-	// }
+	componentDidMount() {
+		axios.get('http://localhost:5000/friends')
+			.then(response => {
+				this.setState({
+					friends: response.data
+				})
+			})
+			.then(() => {
+				return axios.get('http://localhost:5000/')
+			})
+			.then(response => {
+				console.log(response.data)
+			})
+			.catch(err => {
+				console.log('Error:', err)
+			})
+	}
 
 	render() {
 		const { friends } = this.state

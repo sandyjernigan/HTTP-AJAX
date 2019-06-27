@@ -3,11 +3,26 @@ import ReactDOM from "react-dom"
 import { BrowserRouter, Route, Link } from "react-router-dom"
 import axios from "axios"
 import Home from "./components/Home"
+import Friends from "./components/Friends";
+import Friend from "./components/Friend";
 import "./index.css"
 
 class App extends React.Component {
 	state = {
-		friends: []
+		friends: [
+            {
+                id: 1,
+                name: 'Ben',
+                age: 30,
+                email: 'ben@lambdaschool.com',
+            },
+            {
+                id: 2,
+                name: 'Austen',
+                age: 32,
+                email: 'austen@lambdaschool.com',
+            }
+        ]
 	}
 
 	// componentDidMount() {
@@ -41,6 +56,8 @@ class App extends React.Component {
                 </header>
 
                 <Route path="/" exact render={() => <Home />} />
+                <Route path="/friends" exact render={(props) => <Friends {...props} friends={friends} />} />
+				<Route path="/friends/:id" render={(props) => <Friend {...props} friends={friends} />} />
             </div>
 		)
 	}

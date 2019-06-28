@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "react-router-dom"
 
 export default function(props) {
     const friend = props.friends.find(i => String(i.id) === props.match.params.id)

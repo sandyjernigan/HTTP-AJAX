@@ -1,11 +1,10 @@
 import React from "react"
 // import axios from "axios"
-import "./createFriend.css"
+import "./friendsform.css"
 
-class CreateFriend extends React.Component {
+class UpdateFriend extends React.Component {
   state = {
     friend: {
-      id: null,
       name: "",
       age: null,
       email: ""
@@ -16,6 +15,13 @@ class CreateFriend extends React.Component {
     e.preventDefault();
     // invoke form submit
     this.props.addnewfriend(this.state.friend);
+    this.setState({
+      friend: {
+        name: "",
+        age: null,
+        email: ""
+      }
+    })
   };
 
   render() {
@@ -53,4 +59,4 @@ class CreateFriend extends React.Component {
   }
 }
 
-export default CreateFriend;
+export default UpdateFriend;

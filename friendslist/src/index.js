@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, NavLink } from "react-router-dom";
 import axios from "axios";
 import { Home, Friend, Friends, UpdateFriend } from "./components/";
 import "./index.css";
@@ -47,8 +47,8 @@ class App extends React.Component {
       <div className="App">
         <header>
           <nav>
-            <Link to="/">Home</Link>
-            <Link to="/friends">Friends</Link>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/friends">Friends</NavLink>
           </nav>
         </header>
 

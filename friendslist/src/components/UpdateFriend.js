@@ -11,6 +11,15 @@ class UpdateFriend extends React.Component {
     }
   };
 
+  handleChange = e => {
+    this.setState({
+      friend: {
+        ...this.state.friend,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     // invoke form submit
@@ -31,7 +40,7 @@ class UpdateFriend extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            name="friendsname"
+            name="name"
             placeholder="Name..."
             onChange={this.handleChange}
             value={this.state.name}

@@ -2,12 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, NavLink, withRouter } from "react-router-dom";
 import axios from "axios";
-import { Home, Friend, Friends, UpdateFriend } from "./components/";
+import { Home, Friend, Friends, CreateFriend, UpdateFriend } from "./components/";
 import "./index.css";
 
 class App extends React.Component {
   state = {
-    friends: []
+    friends: [], 
+    activefriend: null
   };
 
   componentDidMount() {
@@ -41,6 +42,12 @@ class App extends React.Component {
       });
   };
 
+  setUpdateFriend = (e, friend) => {
+    this.setState({ activefriend: friend }, () => {
+      this.props.history.push('./update')
+    })
+  }
+
   render() {
     const { friends } = this.state;
 
@@ -54,18 +61,17 @@ class App extends React.Component {
         </header>
 
         <Route path="/" exact render={() => <Home />} />
-        <Route
-          path="/friends"
-          exact
-          render={props => <Friends {...props} friends={friends} />}
+        <Route path="/friends"
+          exact render={props => <Friends {...props} friends={friends} />}
         />
-        <Route
-          path="/friends/:id"
-          render={props => <Friend {...props} friends={friends} />}
+        <Route path="/friends/:id"
+          render={props => <Friend {...props} friends={friends} setUpdateFriend={this.setUpdateFriend} />}
         />
-        <Route
-          path="/update"
-          render={props => <UpdateFriend {...props} friends={friends} addnewfriend={this.addnewfriend} />}
+        <Route path="/new"
+          render={props => <CreateFriend {...props} addnewfriend={this.addnewfriend} />}
+        />
+        <Route path="/update"
+          render={props => <UpdateFriend {...props} activefriend={this.state.activefriend} />}
         />
       </div>
     );

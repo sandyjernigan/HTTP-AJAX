@@ -12,6 +12,10 @@ export default function(props) {
             <h3>{friend.name}</h3>
             <p>{friend.age}</p>
             <p>{friend.email}</p>
+
+			<button onClick={e => props.setUpdateFriend(e, friend)}>
+				Update
+			</button>
 		</div>
 	)
 }

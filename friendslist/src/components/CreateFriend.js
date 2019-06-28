@@ -1,21 +1,36 @@
 import React from "react"
 // import axios from "axios"
-import "./createFriend.css"
+import "./friendsform.css"
 
 class CreateFriend extends React.Component {
   state = {
     friend: {
-      id: null,
       name: "",
       age: null,
       email: ""
     }
   };
 
+  handleChange = e => {
+    this.setState({
+      friend: {
+        ...this.state.friend,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     // invoke form submit
     this.props.addnewfriend(this.state.friend);
+    this.setState({
+      friend: {
+        name: "",
+        age: null,
+        email: ""
+      }
+    })
   };
 
   render() {
@@ -25,7 +40,7 @@ class CreateFriend extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            name="friendsname"
+            name="name"
             placeholder="Name..."
             onChange={this.handleChange}
             value={this.state.name}

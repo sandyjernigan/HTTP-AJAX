@@ -33,7 +33,8 @@ class App extends React.Component {
     axios
       .post("http://localhost:5000/friends", friend)
       .then(response => {
-        console.log(response)
+        this.setState({ friends: response.data })
+        this.props.history.push('./friends')
       })
       .catch(err => {
         console.log(err);

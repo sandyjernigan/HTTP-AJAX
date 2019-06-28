@@ -6,10 +6,14 @@ import { Home, Friend, Friends, CreateFriend, UpdateFriend } from "./components/
 import "./index.css";
 
 class App extends React.Component {
-  state = {
-    friends: [], 
-    activefriend: null
-  };
+  constructor() {
+    super()
+    this.state = {
+      friends: [], 
+      activefriend: null, 
+      errMsg: null
+    }
+  }
 
   componentDidMount() {
     axios
@@ -18,12 +22,6 @@ class App extends React.Component {
         this.setState({
           friends: response.data
         });
-      })
-      .then(() => {
-        return axios.get("http://localhost:5000/");
-      })
-      .then(response => {
-        console.log(response.data);
       })
       .catch(err => {
         console.log("Error:", err);
@@ -34,18 +32,19 @@ class App extends React.Component {
     axios
       .post("http://localhost:5000/friends", friend)
       .then(response => {
-        this.setState({ friends: response.data })
+        this.setState({ 
+          friends: response.data, 
+          errMsg: null
+        })
         this.props.history.push('./friends')
       })
       .catch(err => {
-        console.log(err);
+        this.setState({ errMsg: err.response.data.Error })
       });
   };
 
-  setUpdateFriend = (e, friend) => {
-    this.setState({ activefriend: friend }, () => {
-      this.props.history.push('./update')
-    })
+  updateFriends = (friends) => {
+		this.setState({ friends })
   }
 
   render() {
@@ -58,6 +57,7 @@ class App extends React.Component {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/friends">Friends</NavLink>
           </nav>
+          <p>{this.state.errMsg}</p>
         </header>
 
         <Route path="/" exact render={() => <Home />} />
@@ -65,13 +65,13 @@ class App extends React.Component {
           exact render={props => <Friends {...props} friends={friends} />}
         />
         <Route path="/friends/:id"
-          render={props => <Friend {...props} friends={friends} setUpdateFriend={this.setUpdateFriend} />}
+          render={props => <Friend {...props} friends={friends} />}
         />
         <Route path="/new"
           render={props => <CreateFriend {...props} addnewfriend={this.addnewfriend} />}
         />
-        <Route path="/update"
-          render={props => <UpdateFriend {...props} activefriend={this.state.activefriend} />}
+        <Route path="/update/:id"
+          render={props => <UpdateFriend {...props} friends={friends} updateFriends={this.updateFriends} />}
         />
       </div>
     );

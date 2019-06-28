@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 export default function(props) {
     const friend = props.friends.find(i => String(i.id) === props.match.params.id)
@@ -13,9 +14,7 @@ export default function(props) {
             <p>{friend.age}</p>
             <p>{friend.email}</p>
 
-			<button onClick={e => props.setUpdateFriend(e, friend)}>
-				Update
-			</button>
+			<Link to={`/update/${friend.id}`}>Edit</Link>
 		</div>
 	)
 }

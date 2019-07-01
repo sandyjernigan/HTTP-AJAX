@@ -44,6 +44,21 @@ class UpdateFriend extends React.Component {
       })
   }
 
+  deleteFriend = e => {
+    e.preventDefault()
+    const id = this.props.match.params.id
+
+    axios.delete(`http://localhost:5000/friends/${id}`)
+      .then((response) => {
+        this.setState({
+          errMsg: null
+        })
+        this.props.updateFriends(response.data)
+        this.props.history.push("/friends")
+      })
+  }
+
+
   render() {
     const { name, age, email } = this.state
 
@@ -71,6 +86,9 @@ class UpdateFriend extends React.Component {
           />
           <button type="submit">
             Update
+          </button>
+          <button onClick={this.deleteFriend}>
+            Delete
           </button>
         </form>
       </div>

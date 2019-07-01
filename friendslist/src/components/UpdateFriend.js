@@ -14,13 +14,12 @@ class UpdateFriend extends React.Component {
   }
 
   componentDidMount() {
-    const friend = this.props.friends.find(i => String(i.id) === this.props.match.params.id)
-    console.log(friend)
-    // this.setState({ 
-    //   name: friend.name, 
-    //   age: friend.age,
-    //   email: friend.email,
-    // })
+    const id = this.props.match.params.id 
+    const friend = this.props.friends.find(i => String(i.id) === id)
+      this.setState({ 
+        name: friend.name, 
+        age: friend.age, 
+        email: friend.email });
   }
 
   handleChange = e => {
@@ -46,7 +45,6 @@ class UpdateFriend extends React.Component {
   }
 
   render() {
-    const friend = this.props.friends.find(i => String(i.id) === this.props.match.params.id)
     const { name, age, email } = this.state
 
     return (
@@ -57,7 +55,7 @@ class UpdateFriend extends React.Component {
             type="text"
             name="name"
             onChange={this.handleChange}
-            value={friend.name}
+            value={name}
           />
           <input
             type="text"

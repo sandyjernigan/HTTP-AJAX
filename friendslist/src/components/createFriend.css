@@ -1,0 +1,23 @@
+form { 
+    border: 2px solid gray;
+    padding: 1em;
+}
+
+input {
+    height: 30px;
+    margin: 0.5em;
+    padding: 0.5em;
+}
+
+input[name=friendsname] {
+    width: 25em;
+}
+
+input[name=age] {
+    width: 5em;
+}
+
+input[name=email] {
+    display: block;
+    width: 32.4em;
+}
